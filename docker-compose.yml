@@ -1,0 +1,16 @@
+services:
+  timescaledb:
+    image: timescale/timescaledb:latest-pg17
+    container_name: gps-timescaledb
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: gps_telemetry
+      POSTGRES_USER: gps_user
+      POSTGRES_PASSWORD: gps_password
+    volumes:
+      - timescale_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  timescale_data:
