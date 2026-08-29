@@ -1,5 +1,11 @@
 package com.gps.telemetry.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
@@ -8,7 +14,13 @@ import jakarta.validation.constraints.PositiveOrZero;
 
 import java.time.Instant;
 
+@Entity
+@Table(name = "telemetry")
 public class Telemetry {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotBlank
     private String vehicleId;
@@ -57,6 +69,10 @@ public class Telemetry {
         this.ignition = ignition;
         this.batteryVoltage = batteryVoltage;
         this.crashEvent = crashEvent;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getVehicleId() {
