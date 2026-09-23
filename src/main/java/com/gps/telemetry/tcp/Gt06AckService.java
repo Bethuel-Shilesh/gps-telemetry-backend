@@ -3,10 +3,15 @@ package com.gps.telemetry.tcp;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
 public class Gt06AckService {
+
+    private static final Logger logger =
+            LoggerFactory.getLogger(Gt06AckService.class);
 
     public void sendAck(
             ChannelHandlerContext ctx,
@@ -36,10 +41,10 @@ public class Gt06AckService {
 
         ctx.writeAndFlush(response);
 
-        System.out.println(
-                "GT06 ACK sent for protocol: " +
+        logger.debug(
+                "GT06 ACK sent for protocol: 0x{}",
                 String.format(
-                        "0x%02X",
+                        "%02X",
                         protocolNumber & 0xFF
                 )
         );

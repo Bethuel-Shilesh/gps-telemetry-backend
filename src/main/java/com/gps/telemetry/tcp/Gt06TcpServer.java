@@ -9,15 +9,21 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import org.springframework.beans.factory.annotation.Value;
-
 import org.springframework.stereotype.Component;
 
 import com.gps.telemetry.service.TelemetryService;
 
 import jakarta.annotation.PostConstruct;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Component
 public class Gt06TcpServer {
+
+    private static final Logger logger =
+            LoggerFactory.getLogger(Gt06TcpServer.class);
+
     private final TelemetryService telemetryService;
 
     @Value("${gps.tcp.port}")
@@ -53,21 +59,27 @@ public class Gt06TcpServer {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
 
                         @Override
-                        protected void initChannel(SocketChannel socketChannel) {
+                        protected void initChannel(
+                                SocketChannel socketChannel) {
 
                             socketChannel.pipeline()
                                     .addLast(
-                                            new Gt06TcpHandler(ackService,telemetryService)
+                                            new Gt06TcpHandler(
+                                                    ackService,
+                                                    telemetryService
+                                            )
                                     );
                         }
                     })
                     .option(ChannelOption.SO_BACKLOG, 128)
                     .childOption(ChannelOption.SO_KEEPALIVE, true);
 
-            Channel channel = bootstrap.bind(port).sync().channel();
+            Channel channel =
+                    bootstrap.bind(port).sync().channel();
 
-            System.out.println(
-                    "GT06 TCP Server started on port: " + port
+            logger.info(
+                    "GT06 TCP Server started on port: {}",
+                    port
             );
 
             channel.closeFuture().sync();
@@ -75,6 +87,11 @@ public class Gt06TcpServer {
         } catch (InterruptedException e) {
 
             Thread.currentThread().interrupt();
+
+            logger.warn(
+                    "GT06 TCP Server thread interrupted",
+                    e
+            );
 
         } finally {
 

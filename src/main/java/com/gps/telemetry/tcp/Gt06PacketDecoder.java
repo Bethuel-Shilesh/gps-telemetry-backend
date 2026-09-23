@@ -1,9 +1,16 @@
 package com.gps.telemetry.tcp;
+
 import com.gps.telemetry.model.Telemetry;
 import com.gps.telemetry.service.TelemetryService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.time.Instant;
 
 public class Gt06PacketDecoder {
+
+    private static final Logger logger =
+            LoggerFactory.getLogger(Gt06PacketDecoder.class);
 
     private final TelemetryService telemetryService;
 
@@ -13,18 +20,18 @@ public class Gt06PacketDecoder {
 
     public void decode(byte[] data) {
 
-        System.out.println("---- GT06 PACKET ----");
+        logger.info("---- GT06 PACKET ----");
 
         if (data == null || data.length < 8) {
-            System.out.println("INVALID: Packet too short");
+            logger.warn("INVALID: Packet too short");
             return;
         }
 
-        System.out.println("Packet length: " + data.length + " bytes");
-        System.out.println("Packet HEX: " + bytesToHex(data));
+        logger.debug("Packet length: {} bytes", data.length);
+        logger.debug("Packet HEX: {}", bytesToHex(data));
 
         if (!hasValidHeader(data)) {
-            System.out.println("INVALID: Unknown packet header");
+            logger.warn("INVALID: Unknown packet header");
             return;
         }
 
@@ -32,46 +39,44 @@ public class Gt06PacketDecoder {
         int expectedLength = lengthField + 5;
 
         if (data.length != expectedLength) {
-            System.out.println(
-                    "INVALID: Packet length mismatch. " +
-                    "Expected: " + expectedLength +
-                    ", Received: " + data.length
+            logger.warn(
+                    "INVALID: Packet length mismatch. Expected: {}, Received: {}",
+                    expectedLength,
+                    data.length
             );
             return;
         }
 
         int protocolNumber = data[3] & 0xFF;
 
-        System.out.println(
-                String.format(
-                        "Protocol number: 0x%02X",
-                        protocolNumber
-                )
+        logger.debug(
+                "Protocol number: 0x{}",
+                String.format("%02X", protocolNumber)
         );
 
         if (!hasValidStopBits(data)) {
-            System.out.println("INVALID: Stop bits");
+            logger.warn("INVALID: Stop bits");
             return;
         }
 
         if (!hasValidCrc(data)) {
-            System.out.println("INVALID: CRC check failed");
+            logger.warn("INVALID: CRC check failed");
             return;
         }
 
-        System.out.println("GT06 PACKET VALID");
+        logger.info("GT06 PACKET VALID");
 
         Telemetry telemetry = createSimulatedTelemetry();
 
         Telemetry savedTelemetry =
                 telemetryService.saveTelemetry(telemetry);
 
-        System.out.println(
-                "Telemetry saved with ID: " +
+        logger.info(
+                "Telemetry saved with ID: {}",
                 savedTelemetry.getId()
         );
 
-        System.out.println("---------------------");
+        logger.info("---------------------");
     }
 
     private boolean hasValidHeader(byte[] data) {
@@ -102,18 +107,14 @@ public class Gt06PacketDecoder {
                 crcIndex
         );
 
-        System.out.println(
-                String.format(
-                        "Received CRC: 0x%04X",
-                        receivedCrc
-                )
+        logger.debug(
+                "Received CRC: 0x{}",
+                String.format("%04X", receivedCrc)
         );
 
-        System.out.println(
-                String.format(
-                        "Calculated CRC: 0x%04X",
-                        calculatedCrc
-                )
+        logger.debug(
+                "Calculated CRC: 0x{}",
+                String.format("%04X", calculatedCrc)
         );
 
         return receivedCrc == calculatedCrc;
@@ -155,6 +156,7 @@ public class Gt06PacketDecoder {
 
         return result.toString().trim();
     }
+
     private Telemetry createSimulatedTelemetry() {
 
         Telemetry telemetry = new Telemetry();

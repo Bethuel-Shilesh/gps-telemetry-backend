@@ -3,7 +3,13 @@ package com.gps.telemetry.tcp;
 import java.io.ByteArrayOutputStream;
 import java.util.function.Consumer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Gt06PacketFramer {
+
+    private static final Logger logger =
+            LoggerFactory.getLogger(Gt06PacketFramer.class);
 
     private final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
     private final Consumer<byte[]> packetConsumer;
@@ -74,7 +80,7 @@ public class Gt06PacketFramer {
                 packetLength
         );
 
-        System.out.println("Complete GT06 packet detected");
+        logger.debug("Complete GT06 packet detected");
 
         printHex(packet);
 
@@ -127,6 +133,6 @@ public class Gt06PacketFramer {
             result.append(String.format("%02X ", b));
         }
 
-        System.out.println(result.toString().trim());
+        logger.debug("GT06 packet HEX: {}", result.toString().trim());
     }
 }
