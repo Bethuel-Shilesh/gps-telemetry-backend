@@ -25,3 +25,6 @@ application-local.properties
 
 # Java
 *.class
+# Local backups and runtime logs
+/backups/
+/logs/
