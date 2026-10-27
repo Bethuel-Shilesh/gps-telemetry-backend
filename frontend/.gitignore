@@ -22,16 +22,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-# Frontend dependencies and generated build
-frontend/node_modules/
-frontend/dist/
-
-# Local backups and runtime logs
-backups/
-logs/
-
-# Local environment secrets
-.env
-.env.*
-!.env.example
