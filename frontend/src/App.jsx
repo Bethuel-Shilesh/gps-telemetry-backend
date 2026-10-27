@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 
-const API_URL = 'http://localhost:8080/api/telemetry'
+const API_URL = '/api/telemetry'
 
 function formatTime(value) {
   if (!value) return '—'
