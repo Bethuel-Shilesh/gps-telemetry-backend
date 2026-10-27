@@ -1383,3 +1383,489 @@ tbody tr:hover {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* =========================================================
+   GPS PULSE — FLEET ANALYTICS DARK THEME
+   Append this block at the end of App.css
+   ========================================================= */
+
+:root {
+  color-scheme: dark;
+  --sidebar-width: 250px;
+  --page-gutter: clamp(18px, 2.5vw, 36px);
+  --text-primary: #f1f3ed;
+  --text-secondary: #9ba39a;
+  --text-muted: #747e74;
+  --border: #30352e;
+  --blue: #d6ff3e;
+  --blue-light: #242b19;
+  --surface: #151714;
+  --radius: 2px;
+  --shadow: none;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 320px;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  background: #0b0c0a;
+  color: #f1f3ed;
+  font-family: 'DM Sans', sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  color: #f1f3ed;
+}
+
+button,
+input,
+select,
+textarea {
+  color-scheme: dark;
+}
+
+.app-shell {
+  min-height: 100vh;
+  background: #0b0c0a;
+}
+
+.main-content {
+  min-width: 0;
+  background: #0b0c0a;
+}
+
+/* Sidebar */
+.sidebar {
+  background: #11120f;
+  border-right: 1px solid #292c25;
+  color: #f1f3ed;
+}
+
+.brand-icon {
+  border-radius: 2px;
+  background: #d6ff3e;
+  color: #11120f;
+}
+
+.brand span,
+.sidebar-bottom div > span {
+  color: #858d80;
+}
+
+.nav-label {
+  color: #737b6e;
+}
+
+.nav-item {
+  border-radius: 2px;
+  color: #a8afa2;
+}
+
+.nav-item:hover {
+  background: #20231b;
+  color: #f1f3ed;
+}
+
+.nav-item.active {
+  background: #d6ff3e;
+  color: #10120c;
+}
+
+.sidebar-bottom {
+  border-color: #30352e;
+}
+
+.connection-dot {
+  background: #d6ff3e;
+}
+
+/* Top bar and headings */
+.topbar {
+  border-bottom-color: #30352e;
+}
+
+.breadcrumb {
+  color: #8c9487;
+}
+
+.breadcrumb span {
+  color: #535b4e;
+}
+
+.environment {
+  color: #a6aea0;
+}
+
+.environment span {
+  background: #d6ff3e;
+}
+
+.avatar {
+  border-radius: 2px;
+  background: #25291e;
+  color: #d6ff3e;
+}
+
+.eyebrow {
+  color: #d6ff3e;
+  letter-spacing: 1.8px;
+}
+
+.page-heading h1,
+.welcome-panel h2 {
+  color: #f1f3ed;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Panels and cards */
+.panel,
+.stat-card,
+.module-card {
+  border: 1px solid #30352e;
+  border-radius: 2px;
+  background: #151714;
+  box-shadow: none;
+}
+
+.panel {
+  overflow: hidden;
+}
+
+.welcome-panel {
+  border: 1px solid #454b31;
+  border-radius: 2px;
+  background: #171a12;
+}
+
+.welcome-panel h2 {
+  color: #f1f3ed;
+}
+
+.welcome-panel p:not(.eyebrow) {
+  color: #a0a79a;
+}
+
+.welcome-symbol {
+  border: 1px solid #454b31;
+  border-radius: 2px;
+  background: #23291a;
+  color: #d6ff3e;
+}
+
+.panel-heading {
+  border-bottom-color: #30352e;
+}
+
+.panel-heading h2 {
+  color: #f1f3ed;
+}
+
+.panel-heading p,
+.subtitle {
+  color: #9ba39a;
+}
+
+.data-label {
+  border-radius: 2px;
+  background: #25291e;
+  color: #d6ff3e;
+}
+
+.live-label {
+  border-radius: 2px;
+  background: #202719;
+  color: #d6ff3e;
+}
+
+.live-label span {
+  background: #d6ff3e;
+}
+
+/* Statistics */
+.stat-top {
+  color: #9ba393;
+}
+
+.stat-icon,
+.module-icon {
+  border-radius: 2px;
+  background: #24291b;
+  color: #d6ff3e;
+}
+
+.stat-icon.blue,
+.stat-icon.purple,
+.stat-icon.green,
+.stat-icon.orange {
+  background: #24291b;
+  color: #d6ff3e;
+}
+
+.stat-value {
+  color: #f1f3ed;
+}
+
+.stat-value small,
+.snapshot-item small,
+.stat-foot {
+  color: #8b9486;
+}
+
+/* Module cards */
+.module-card {
+  color: #f1f3ed;
+  text-align: left;
+  transition: border-color 150ms ease;
+}
+
+.module-card:hover {
+  transform: none;
+  border-color: #d6ff3e;
+}
+
+.module-card strong {
+  color: #f1f3ed;
+}
+
+.module-card p {
+  color: #9ba39a;
+}
+
+.module-link {
+  color: #d6ff3e;
+}
+
+/* Snapshot and empty states */
+.snapshot-item span {
+  color: #8b9486;
+}
+
+.snapshot-item strong {
+  color: #e5e9df;
+}
+
+.empty-state {
+  color: #9ba39a;
+}
+
+/* Filters and form controls */
+.filter-grid label {
+  color: #c2c8bc;
+}
+
+.filter-grid input,
+.search-input,
+.filter-grid select,
+input,
+select,
+textarea {
+  border-color: #3a4035;
+  border-radius: 2px;
+  background-color: #10120f;
+  color: #e8ece2;
+}
+
+.filter-grid input::placeholder,
+.search-input::placeholder {
+  color: #6f786a;
+}
+
+.filter-grid input:focus,
+.search-input:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #d6ff3e;
+  outline: 1px solid #d6ff3e;
+  outline-offset: 0;
+}
+
+.filter-grid input[type="date"],
+.filter-grid input[type="month"] {
+  color-scheme: dark;
+}
+
+.filter-hint {
+  color: #858d80;
+}
+
+/* Buttons */
+.primary-button,
+.secondary-button,
+.refresh-button {
+  min-height: 40px;
+  border-radius: 2px;
+  box-shadow: none;
+  font-weight: 700;
+}
+
+.primary-button {
+  border: 1px solid #d6ff3e;
+  background: #d6ff3e;
+  color: #10120c;
+}
+
+.primary-button:hover:not(:disabled) {
+  border-color: #e3ff82;
+  background: #e3ff82;
+  color: #10120c;
+}
+
+.secondary-button,
+.refresh-button {
+  border: 1px solid #3a4035;
+  background: #171915;
+  color: #dce2d5;
+}
+
+.secondary-button:hover:not(:disabled),
+.refresh-button:hover:not(:disabled) {
+  border-color: #d6ff3e;
+  background: #22271a;
+  color: #d6ff3e;
+}
+
+/* Telemetry tables */
+.table-wrap {
+  background: #151714;
+}
+
+.table-wrap table,
+table {
+  border-collapse: collapse;
+}
+
+thead {
+  background: #1c1f19;
+}
+
+th {
+  border-bottom: 1px solid #363b30;
+  color: #a5ad9c;
+  font-size: 11px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+td {
+  border-top: 1px solid #292d25;
+  color: #b7beb1;
+}
+
+tbody tr {
+  background: #151714;
+}
+
+tbody tr:hover {
+  background: #20231b;
+}
+
+.vehicle-id {
+  color: #f1f3ed;
+}
+
+.speed-pill {
+  border-radius: 2px;
+  background: #25291e;
+  color: #d6ff3e;
+}
+
+.sort-button:hover {
+  color: #d6ff3e;
+}
+
+.table-footer {
+  border-top-color: #30352e;
+  color: #9ba39a;
+}
+
+.pagination button {
+  border: 1px solid #3a4035;
+  border-radius: 2px;
+  background: #171915;
+  color: #dce2d5;
+}
+
+.pagination button:hover:not(:disabled) {
+  border-color: #d6ff3e;
+  background: #24291b;
+  color: #d6ff3e;
+}
+
+/* Map — preserve Leaflet interactions and marker visibility */
+.map-container {
+  border: 1px solid #30352e;
+  border-radius: 2px;
+  background: #151714;
+}
+
+.map-container .leaflet-container {
+  background: #171a14;
+}
+
+.vehicle-marker {
+  border-color: #10120f;
+  background: #d6ff3e;
+  box-shadow: none;
+}
+
+.vehicle-marker span {
+  background: #10120f;
+}
+
+.map-empty {
+  border-color: #3a4035;
+  border-radius: 2px;
+  background: #151714;
+}
+
+.map-empty strong {
+  color: #f1f3ed;
+}
+
+.map-empty p,
+.map-note {
+  color: #9ba39a;
+}
+
+/* Errors and footer */
+.error-banner {
+  border: 1px solid #653b35;
+  border-radius: 2px;
+  background: #241512;
+  color: #ffaaa0;
+}
+
+.page-footer {
+  color: #747e74;
+}
+
+/* Keyboard focus */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #d6ff3e;
+  outline-offset: 2px;
+}
+
+/* Responsive layout */
+@media (max-width: 680px) {
+  .sidebar {
+    border-right: 0;
+    border-bottom: 1px solid #30352e;
+  }
+
+  .main-content {
+    width: 100%;
+  }
+}
