@@ -1,3 +1,4 @@
+
 package com.gps.telemetry.controller;
 
 import com.gps.telemetry.model.Telemetry;
@@ -5,6 +6,10 @@ import com.gps.telemetry.service.TelemetryService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -31,4 +36,19 @@ public class TelemetryController {
 
         return telemetryService.saveTelemetry(telemetry);
     }
+
+    @GetMapping
+    public Page<Telemetry> getTelemetry(
+            @PageableDefault(
+                    size = 20,
+                    sort = "timestamp",
+                    direction = Sort.Direction.DESC
+            ) Pageable pageable) {
+
+        return telemetryService.getTelemetry(pageable);
+    }
 }
+
+
+
+
